@@ -1,0 +1,17 @@
+#include <iostream>
+using namespace std;
+
+void fact(int x,int y){
+    if(y<=x){
+        if(x%y==0){
+            cout<<y<<" ";
+        }
+        fact(x,y+1);
+    }
+}
+
+int main(){
+    int N;
+    cin>>N;
+    fact(N,1);
+}

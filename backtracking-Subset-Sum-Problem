@@ -1,0 +1,29 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int sstcount = 0;
+
+void subset(vector<int> & list, int stsum, int idx, int targetsum){
+    if(stsum==targetsum){
+        sstcount++;
+    }
+    else{
+        for(int i=idx;i<list.size();i++){
+            subset(list,stsum + list[i],i+1,targetsum);
+        }
+    }
+}
+
+int main(){
+    int n;
+    cin>>n;
+    vector<int>list(n);
+    for(int i=0;i<n;i++){
+        cin>>list[i];
+    }
+    int targetsum;
+    cin>>targetsum;
+    subset(list,0,0,targetsum);
+    cout<<sstcount;
+}

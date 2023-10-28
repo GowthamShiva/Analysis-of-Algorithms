@@ -1,0 +1,16 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int len(const char* str){
+    if(*str == '\0')
+     return 0;
+    else
+     return 1 + len(str+1);
+}
+
+int main(){
+    string s;
+    getline(cin,s);
+    const char* str = s.c_str();
+    cout<<len(str);
+}

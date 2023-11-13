@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+int m[100][100];
+int r, c;
+
+void find(){
+    int s[r][c];
+    for(int i=0;i<r;i++){
+        s[i][0] = m[i][0];
+    }
+    for(int i=0;i<c;i++){
+        s[0][i] = m[0][i];
+    }
+    int maxs = 0, count=0;
+    for(int i=1;i<r;i++){
+        for(int j=1;j<c;j++){
+            if(m[i][j]==1){
+                s[i][j] = min(s[i-1][j], s[i][j-1]);
+                s[i][j] = min(s[i][j], s[i-1][j-1]);
+                s[i][j] += 1;
+            }
+            else{
+                s[i][j] = 0;
+            }
+        }
+    }
+    
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            if(s[i][j]>maxs){
+                maxs = s[i][j];
+            }
+        }
+    }
+    
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            if(maxs==s[i][j]){
+                count++;
+            }
+        }
+    }
+ 
+    cout<<"Number of maximum size square sub-matrices with all 1s: "<<count<<endl;
+}
+
+int main(){
+    cin>> r >> c;
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            cin >> m[i][j];
+        }
+    }
+    find();
+}

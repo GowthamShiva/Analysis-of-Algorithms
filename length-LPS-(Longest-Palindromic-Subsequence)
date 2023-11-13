@@ -1,0 +1,21 @@
+#include<iostream>
+using namespace std;
+
+int LPS(string str,int i,int j){
+    if(i==j)
+    return 1;
+    else if(str[i]==str[j]&&i+1==j)
+    return 2;
+    else if(str[i]==str[j])
+    return LPS(str,i+1,j-1)+2;
+    else
+    return max(LPS(str,i+1,j),LPS(str,i,j-1));
+}
+
+int main(){
+    string str;
+    cin>>str;
+    int i=0;
+    int j=str.length()-1;
+    cout<<"The length of the LPS is "<<LPS(str,i,j);
+}

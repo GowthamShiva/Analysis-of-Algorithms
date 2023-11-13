@@ -1,0 +1,57 @@
+#include<bits/stdc++.h>
+using namespace std;
+void mcpath(vector<vector<int>> &arr){
+    int row=arr.size();
+    int col=arr[0].size();
+    vector<vector<int>> mincost(row,vector<int>(col,0));
+    vector<vector<int>> dir(row,vector<int>(col,0));
+    mincost[0][0]=arr[0][0];
+    for(int i=1;i<row;i++){
+        mincost[i][0]=mincost[i-1][0]+arr[i][0];
+        dir[i][0]=1;
+    }
+    for(int i=1;i<col;i++){
+        mincost[0][i]=mincost[0][i-1]+arr[0][i];
+        dir[0][i]=2;
+    }
+    for(int i=1;i<row;i++){
+        for(int j=1;j<col;j++){
+            if(mincost[i-1][j]<mincost[i][j-1]){
+                mincost[i][j]=arr[i][j]+mincost[i-1][j];
+                dir[i][j]=1;
+            }
+            else{
+                mincost[i][j]=arr[i][j]+mincost[i][j-1];
+                dir[i][j]=2;
+            }
+        }
+    }
+    cout<<"Minimum Cost: "<<mincost[row-1][col-1]<<endl;
+    stack<pair<int,int>> path;
+    int i=row-1,j=col-1;
+    while(i>0||j>0){
+        path.push({i,j});
+        if(dir[i][j]==1){
+            i--;
+        }
+        else{
+            j--;
+        }
+    }
+    path.push({0,0});
+    cout<<"Path:"<<endl;
+    while(!path.empty()){
+        pair<int,int>cell=path.top();
+        path.pop();
+        cout<<"("<<cell.first<<", "<<cell.second<<")"<<endl;
+    }
+}
+int main(){
+    int er,ec;
+    cin>>er>>ec;
+    vector<vector<int>>arr(er,vector<int>(ec));
+    for(int i=0;i<er;i++)
+    for(int j=0;j<ec;j++)
+    cin>>arr[i][j];
+    mcpath(arr);
+}

@@ -1,0 +1,24 @@
+#include<iostream>
+using namespace std;
+
+int rangeCount(int n,int arr[],int st,int en){
+    int count=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]>=st&&arr[i]<=en){
+            count++;
+        }
+    }
+    return count;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int st,en;
+    cin>>st>>en;
+    cout<<rangeCount(n,arr,st,en);
+}

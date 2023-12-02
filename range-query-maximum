@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int rangeMax(int n,int arr[], int st,int en){
+    if(st<0||en>=n||st>en){
+        return 0;
+    }
+    int max=arr[st];
+    for(int i=st+1;i<=en;i++){
+        if(arr[i]>max){
+            max=arr[i];
+        }
+    }
+    return max;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int st,en;
+    cin>>st>>en;
+    cout<<rangeMax(n,arr,st,en);
+}

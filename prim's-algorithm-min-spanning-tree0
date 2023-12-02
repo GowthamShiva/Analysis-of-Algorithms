@@ -1,0 +1,51 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+int minKey(int key[], bool mstSet[], int V){
+    int min = INT_MAX, minidx;
+    for(int v=0;v<V;v++){
+        if(mstSet[v]==false && key[v]<min){
+            min = key[v];
+            minidx = v;
+        }
+    }
+    return minidx;
+}
+
+void prim(int graph[100][100], int V){
+    int key[V], parent[V];
+    bool mstSet[V];
+    for(int i=0;i<V;i++){
+        key[i] = INT_MAX;
+        mstSet[i] = false;
+    }
+    parent[0] = -1;
+    key[0] = 0;
+    for(int count = 0;count<V-1;count++){
+        int u = minKey(key, mstSet, V);
+        mstSet[u] = true;
+        for(int v=0;v<V;v++){
+            if(graph[u][v] && mstSet[v]==false && graph[u][v]<key[v]){
+                key[v] = graph[u][v];
+                parent[v] = u;
+            }
+        }
+    }
+    int sum = 0;
+    for(int i=1;i<V;i++){
+        sum += graph[i][parent[i]];
+    }
+    cout << sum;
+}
+
+int main(){
+    int V;
+    cin >> V;
+    int graph[100][100];
+    for(int i=0;i<V;i++){
+        for(int j=0;j<V;j++){
+            cin >> graph[i][j];
+        }
+    }
+    prim(graph, V);
+}

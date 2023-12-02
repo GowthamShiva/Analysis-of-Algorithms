@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int rangeSum(int n,int arr[],int start,int end){
+    if(start<0||end>=n||start>end){
+        return 0;
+    }
+    int sum=0;
+    for(int i=start;i<=end;i++){
+        sum=sum+arr[i];
+    }
+    return sum;
+}
+
+int main(){
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    int start,end;
+    cin>>start>>end;
+    cout<<rangeSum(n,arr,start,end);
+}
